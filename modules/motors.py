@@ -19,13 +19,14 @@ class Motor:
             self.enable1.value(0) # Enciende el enable 1
             self.enable2.value(0) # Enciende el enable 2
             self.led_estatus.value(1)  # Enciende el LED de estatus para indicar que el motor está inicializado
-            print("Motor inicializado en el pin PWM:")
+            print("==========================\nMotor inicializado en el pin PWM:")
             print(pin)
             print("Frecuencia PWM:")
             print(freq)
             print("Confirmacion de pines de habilitacion:")
             print("Enable 1:", enable1)
             print("Enable 2:", enable2)
+            print("\n\n")
         except Exception as e:
             print("Error al inicializar el motor:", e)
 
@@ -41,9 +42,10 @@ class Motor:
         """Mover el motor hacia adelante."""
         self.enable1.value(1)
         self.enable2.value(0)
-        print("adelante")
+        print("=====================\n\tadelante\n")
         print("Valor del Enable 1: ", self.enable1.value())
         print("Valor del Enable 2: ", self.enable2.value())
+        print("\n\n")
 
     def go_backward(self):
         """Mover el motor hacia atrás."""
@@ -52,6 +54,7 @@ class Motor:
         print("atras")
         print("Valor del Enable 1: ", self.enable1.value())
         print("Valor del Enable 2: ", self.enable2.value())
+        print("\n\n")
 
     def stop(self):
         """Detener el motor."""

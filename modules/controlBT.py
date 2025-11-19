@@ -26,11 +26,7 @@ class controlBT:
         self.BLE_INTERVALO = intervalo
         self.BLE_WINDOW = window
 
-        self.message_count = 0
-    
-    def decode_message(mensaje):
-        return mensaje.decode('utf-8')
-    
+        self.message_count = 0    
 
     async def receive_data_task(self, characteristic):
         while True:
@@ -38,6 +34,6 @@ class controlBT:
                 data = await characteristic.read()
 
                 if data:
-                    print(f"{SOY} recibió el siguiente mensaje: {}")
+                    print(f"{SOY} recibió el siguiente mensaje\n")
             
             except: 
