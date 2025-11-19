@@ -38,9 +38,9 @@ class controlBT:
                 if data:
                     try:
                         message = data.decode('utf-8')
-                        print(f"{SOY} recibió: '{message}' (contador: {self.message_count + 1})")
+                        print(f"{SOY} recibe: '{message}' (contador: {self.message_count + 1})")
                     except:
-                        print(f"{SOY} recibió datos: {data.hex()} (contador: {self.message_count + 1})")
+                        print(f"{SOY} recibie datos: {data.hex()} (contador: {self.message_count + 1})")
                     
                     self.message_count += 1
 
