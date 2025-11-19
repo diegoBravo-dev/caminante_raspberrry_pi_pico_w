@@ -1,5 +1,6 @@
 from machine import PWM, Pin
 from time import sleep
+from sys import exit
 
 PWM_FREQ = 1000  # Frecuencia del PWM en HZ
 pin_pwm = 15 # Número de pin GPIO para PWM, se puede cambiar según sea necesario
@@ -28,6 +29,7 @@ class Motor:
             print("Enable 2:", enable2)
         except Exception as e:
             print("Error al inicializar el motor:", e)
+            exit()
 
     def set_speed(self, speed):
         """Establecer la velocidad del motor como un porcentaje (0-100)."""
@@ -60,6 +62,7 @@ class Motor:
     def cleanup(self):
         """Liberar los recursos de PWM."""
         self.pwm.deinit()
+        exit()
     
     def check_motor(self):
         """Revisar si el PWM asignado está bien"""
