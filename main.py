@@ -1,12 +1,11 @@
 import modules.motors as motors
+import modules.controlBT as controlBT
+import asyncio
+
+async def control_iniciar(control):
+    await control.peripheral_mode()
 
 motorRight = motors.Motor()
 motorLeft = motors.Motor(16, 1000, 17, 18)
-
-"""PRUEBAS PARA VERIFICAR LOS MÉTODOS"""
-
-motorRight.set_speed(50)
-motorLeft.set_speed(50)
-
-motorRight.go_forward()
-motorLeft.go_forward()
+control = controlBT.controlBT()
+asyncio.run(control_iniciar(control))
