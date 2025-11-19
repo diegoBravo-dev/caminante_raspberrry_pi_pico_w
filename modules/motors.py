@@ -2,13 +2,18 @@ from machine import PWM, Pin
 
 PWM_FREQ = 1000  # Frecuencia del PWM en HZ
 pin_pwm = 15 # Número de pin GPIO para PWM, se puede cambiar según sea necesario
+pin_enable1 = 14
+pin_enable2 = 13
+
 
 class Motor:
-    def __init__(self, pin=pin_pwm, freq=PWM_FREQ):
+    def __init__(self, pin=pin_pwm, freq=PWM_FREQ, enable1=pin_enable1, enable2=pin_enable2):
         try:
             self.pwm = PWM(Pin(pin))
             self.pwm.freq(freq)
             self.speed = 0  # Velocidad inicial del motor en porcentaje (0-100)
+            self.enable1 = Pin(enable1, Pin.OUT) # Habilita el pin 1 de control del motor
+            self.enable2 = Pin(enable2, Pin.OUT) # Habilita el pin 2 de control del motor
             self.led_estatus = Pin("LED", Pin.OUT)
             self.led_estatus.value(1)  # Enciende el LED de estatus para indicar que el motor está inicializado
             print(pin)
@@ -23,6 +28,22 @@ class Motor:
         self.speed = speed
         duty_cycle = int((speed / 100) * 65535)  # Convierte porcentaje a valor de duty cycle (0-65535)
         self.pwm.duty_u16(duty_cycle)
+
+    def go_forward(self):
+        """Mover el motor hacia adelante."""
+        self.enable1.value(1)
+        self.enable2.value(0)
+        print("adelante")
+        print("Valor del Enable 1: ", self.enable1.value())
+        print("Valor del Enable 2: ", self.enable2.value())
+
+    def go_backward(self):
+        """Mover el motor hacia atrás."""
+        self.enable1.value(0)
+        self.enable2.value(1)
+        print("atras")
+        print("Valor del Enable 1: ", self.enable1.value())
+        print("Valor del Enable 2: ", self.enable2.value())
 
     def stop(self):
         """Detener el motor."""
