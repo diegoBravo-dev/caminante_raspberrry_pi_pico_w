@@ -1,6 +1,5 @@
 from machine import PWM, Pin
 from time import sleep
-from sys import exit
 
 PWM_FREQ = 1000  # Frecuencia del PWM en HZ
 pin_pwm = 15 # Número de pin GPIO para PWM, se puede cambiar según sea necesario
@@ -20,16 +19,16 @@ class Motor:
             self.enable1.value(0) # Enciende el enable 1
             self.enable2.value(0) # Enciende el enable 2
             self.led_estatus.value(1)  # Enciende el LED de estatus para indicar que el motor está inicializado
-            print("Motor inicializado en el pin PWM:")
+            print("==========================\nMotor inicializado en el pin PWM:")
             print(pin)
             print("Frecuencia PWM:")
             print(freq)
             print("Confirmacion de pines de habilitacion:")
             print("Enable 1:", enable1)
             print("Enable 2:", enable2)
+            print("\n\n")
         except Exception as e:
             print("Error al inicializar el motor:", e)
-            exit()
 
     def set_speed(self, speed):
         """Establecer la velocidad del motor como un porcentaje (0-100)."""
@@ -43,9 +42,10 @@ class Motor:
         """Mover el motor hacia adelante."""
         self.enable1.value(1)
         self.enable2.value(0)
-        print("adelante")
+        print("=====================\n\tadelante\n")
         print("Valor del Enable 1: ", self.enable1.value())
         print("Valor del Enable 2: ", self.enable2.value())
+        print("\n\n")
 
     def go_backward(self):
         """Mover el motor hacia atrás."""
@@ -54,6 +54,7 @@ class Motor:
         print("atras")
         print("Valor del Enable 1: ", self.enable1.value())
         print("Valor del Enable 2: ", self.enable2.value())
+        print("\n\n")
 
     def stop(self):
         """Detener el motor."""
@@ -62,7 +63,6 @@ class Motor:
     def cleanup(self):
         """Liberar los recursos de PWM."""
         self.pwm.deinit()
-        exit()
     
     def check_motor(self):
         """Revisar si el PWM asignado está bien"""
