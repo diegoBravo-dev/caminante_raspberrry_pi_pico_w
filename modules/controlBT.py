@@ -25,6 +25,7 @@ class controlBT:
         self.BLE_ADVERTISING_INTERVAL = intervalo_advertencia
         self.message_count = 0
         self.connection = None
+        self.callback_procesar = None 
 
     async def receive_data_task(self, rx_characteristic):
         """Tarea para recibir datos del celular"""
@@ -43,6 +44,9 @@ class controlBT:
                         print(f"{SOY} recibie datos: {data.hex()} (contador: {self.message_count + 1})")
                     
                     self.message_count += 1
+
+                    if self.callback_procesar is not None:
+                        await self.callback_procesar(data) # type: ignore
 
             except asyncio.CancelledError:
                 print("Tarea de recepción cancelada")
